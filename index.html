@@ -71,7 +71,7 @@ function draw() {
   analyser.getByteFrequencyData(data);
 
   if (greenScreen) {
-  ctx.fillStyle = "#00FF00"; // 크로마키용 그린
+  ctx.fillStyle = "#00FF00";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 } else {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -80,14 +80,12 @@ function draw() {
 const midY = canvas.height / 2;
 const barCount = data.length;
 
-// 전체 폭을 정확히 나눔
 const barWidth = Math.floor(canvas.width / barCount);
 
 data.forEach((v, i) => {
   const barHeight = v * 0.8;
   const x = i * barWidth;
 
-  // 마지막 바가 캔버스 넘어가면 스킵
   if (x + barWidth > canvas.width) return;
 
   const gradient = ctx.createLinearGradient(
@@ -96,18 +94,17 @@ data.forEach((v, i) => {
     0,
     midY + barHeight
   );
-  gradient.addColorStop(0, "#7FDBFF");
-  gradient.addColorStop(1, "#0050FF");
+  gradient.addColorStop(0, "#b5000c");
+  gradient.addColorStop(1, "#520005");
 
   ctx.fillStyle = gradient;
 
-  // 위
   ctx.fillRect(x, midY - barHeight, barWidth, barHeight);
-  // 아래
   ctx.fillRect(x, midY, barWidth, barHeight);
 });
 }
 </script>
 </body>
 </html>
+
 
